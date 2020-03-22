@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/kategori', 'CategoryController')->except([
+    'create', 'show'
+]);
+
+Route::resource('/produk', 'ProductController');
