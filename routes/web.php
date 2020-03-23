@@ -12,11 +12,41 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 
-Route::resource('/kategori', 'CategoryController')->except([
-    'create', 'show'
-]);
+Auth::routes();
 
-Route::resource('/produk', 'ProductController');
+Route::group(['middleware' => ['auth']], function () {
+
+    // Route yang bisa diakses oleh owner
+    Route::group(['middleware' => ['role:owner']], function () {
+
+        Route::resource('/role', 'RoleController')->except([
+            'create', 'show', 'edit', 'update'
+        ]);
+
+        Route::resource('/users', 'UserController')->except([
+            'show'
+        ]);
+
+        Route::get('/users/roles/{id}', 'UserController@roles')->name('users.roles');
+        Route::put('/users/roles/{id}', 'UserController@setRole')->name('users.set_role');
+        Route::post('/users/permission', 'UserController@addPermission')->name('users.add_permission');
+        Route::get('/users/roles-permission', 'UserController@rolePermission')->name('users.roles_permission');
+        Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
+
+    });
+
+    // Route yang bisa diakses oleh semua user
+    Route::resource('/kategori', 'CategoryController')->except([
+        'create', 'show'
+    ]);
+
+    Route::resource('/produk', 'ProductController');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+});
+
+
