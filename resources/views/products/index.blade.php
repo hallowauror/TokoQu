@@ -65,7 +65,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <p class="text-white bg-success">{{$row->code}}</p>
+                                                <label class="badge badge-success">{{$row->code}}</label>
                                             </td>
                                             <td>
                                                 <strong>{{ucfirst($row->product_name)}}</strong>

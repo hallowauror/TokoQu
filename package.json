@@ -22,5 +22,14 @@
         "sass-loader": "^8.0.0",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "moment": "^2.24.0",
+        "momentjs": "^2.0.0",
+        "raphael": "^2.3.0",
+        "select2": "^4.0.13",
+        "sweetalert2": "^9.10.6",
+        "vue-select": "^3.9.5",
+        "vue-sweetalert2": "^3.0.3"
     }
 }

@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
 
-    // Route yang bisa diakses oleh owner
+    // Route yang hanya bisa diakses oleh owner
     Route::group(['middleware' => ['role:owner']], function () {
 
         Route::resource('/role', 'RoleController')->except([
@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/users', 'UserController')->except([
             'show'
         ]);
-
+        
         Route::get('/users/roles/{id}', 'UserController@roles')->name('users.roles');
         Route::put('/users/roles/{id}', 'UserController@setRole')->name('users.set_role');
         Route::post('/users/permission', 'UserController@addPermission')->name('users.add_permission');
@@ -44,6 +44,10 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::resource('/produk', 'ProductController');
+
+    Route::get('/transaksi', 'OrderController@addOrder')->name('order.transaksi');
+    Route::get('/checkout', 'OrderController@checkout')->name('order.checkout');
+    Route::post('/checkout', 'OrderController@storeOrder')->name('order.storeOrder');
 
     Route::get('/home', 'HomeController@index')->name('home');
 
