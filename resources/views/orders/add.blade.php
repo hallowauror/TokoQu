@@ -46,7 +46,7 @@
                                                         v-model="cart.product_id"
                                                         class="form-control"
                                                         required width="100%">
-                                                    <option value="">Pilih</option>
+                                                    <option disabled>-- Pilih -- </option>
                                                     @foreach ($products as $product)
                                                     <option value="{{ $product->id_product }}">{{ $product->code }} - {{ $product->product_name }}</option>
                                                     @endforeach

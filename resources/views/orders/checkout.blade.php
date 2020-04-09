@@ -37,25 +37,25 @@
                             @endslot
                                 <!-- JIKA VALUE DARI message ada, maka alert success akan ditampilkan -->
                                 <div v-if="message" class="alert alert-success">
-                                    Transaksi telah disimpan, Invoice: <strong>#@{{ message }}</strong>
+                                    Transaksi telah disimpan, Nota: <strong>#@{{ message }}</strong>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Email</label>
-                                    <input type="text" name="email" 
+                                    <input type="text" name="email"
                                         v-model="customer.email_customer"
-                                        class="form-control" 
+                                        class="form-control"
                                         @keyup.enter.prevent="searchCustomer"
                                         required
                                         >
                                     <p>Tekan enter untuk mengecek email.</p>
                                     <!-- EVENT KETIKA TOMBOL ENTER DITEKAN, MAKA AKAN MEMANGGIL METHOD searchCustomer dari Vuejs -->
                                 </div>
-                        
+
                                 <!-- JIKA formCustomer BERNILAI TRUE, MAKA FORM AKAN DITAMPILKAN -->
                                 <div v-if="formCustomer">
                                     <div class="form-group">
                                         <label for="">Nama Pelanggan</label>
-                                        <input type="text" name="name" 
+                                        <input type="text" name="name"
                                             v-model="customer.name_customer"
                                             :disabled="resultStatus"
                                             class="form-control" required>
@@ -70,10 +70,22 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="">No Telp</label>
-                                        <input type="text" name="phone" 
+                                        <input type="number" name="phone"
                                             v-model="customer.phone_customer"
                                             :disabled="resultStatus"
                                             class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Jenis Pelanggan</label>
+                                        <select name="type"
+                                                v-model="customer.type"
+                                                :disabled="resultStatus"
+                                                class="form-control" required>
+                                        <option disabled>-- Pilih -- </option>
+                                        <option value="Customer">Customer</option>
+                                        <option value="Reseller">Reseller</option>
+                                        <option value="Dropshipper">Dropshipper</option>
+                                        </select>
                                     </div>
                                 </div>
                             @slot('footer')
@@ -84,7 +96,7 @@
                                     </div>
                                     <!-- JIKA TOMBOL DITEKAN MAKA AKAN MEMANGGIL METHOD sendOrder -->
                                     <button class="btn btn-primary btn-sm float-right"
-                                        :disabled="submitForm"  
+                                        :disabled="submitForm"
                                         @click.prevent="sendOrder"
                                         >
                                         @{{ submitForm ? 'Loading...':'Order Now' }}

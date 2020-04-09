@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/users', 'UserController')->except([
             'show'
         ]);
-        
+
         Route::get('/users/roles/{id}', 'UserController@roles')->name('users.roles');
         Route::put('/users/roles/{id}', 'UserController@setRole')->name('users.set_role');
         Route::post('/users/permission', 'UserController@addPermission')->name('users.add_permission');

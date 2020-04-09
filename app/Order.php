@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $guarded = [];
-​
+
     //Model relationships ke Order_detail menggunakan hasMany
-    public function order_detail()
+    public function orderDetail()
     {
-        return $this->hasMany(Order_detail::class);
+        return $this->hasMany(OrderDetail::class);
     }
 }

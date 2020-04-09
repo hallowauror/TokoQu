@@ -55,7 +55,8 @@ new Vue({
                 this.customer = {
                     name_customer: '',
                     phone_customer: '',
-                    address_customer: ''
+                    address_customer: '',
+                    type: ''
                 }
             }
         }
@@ -159,37 +160,37 @@ new Vue({
                         })
                 }
             })
-        }, 
+        },
 
         searchCustomer() {
             axios.post('/api/customer/search', {
-                email: this.customer.email_customer
+                email_customer: this.customer.email_customer
             })
             .then((response) => {
                 if (response.data.status == 'success') {
                     this.customer = response.data.data
                     this.resultStatus = true
-                } 
+                }
                 this.formCustomer = true
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
         },
 
-        
+
        sendOrder() {
             //Mengosongkan var errorMessage dan message
             this.errorMessage = ''
             this.message = ''
-            
+
             //jika var customer.email dll tidak kosong
-            if (this.customer.email_customer != '' && this.customer.name_customer != '' && this.customer.phone_customer != '' && this.customer.address_customer != '') {
+            if (this.customer.email_customer != '' && this.customer.name_customer != '' && this.customer.phone_customer != '' && this.customer.address_customer != '' && this.customer.type != '') {
                 //maka akan menampilkan kotak dialog konfirmasi
                 this.$swal({
                     title: 'Kamu Yakin?',
-                    text: 'Kamu Tidak Dapat Mengembalikan Tindakan Ini!',
-                    type: 'warning',
+                    text: 'Data yang diisi harus benar!',
+                    icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Lanjutkan!',
                     cancelButtonText: 'Batalkan!',
@@ -220,7 +221,8 @@ new Vue({
                                 this.customer = {
                                     name_customer: '',
                                     phone_customer: '',
-                                    address_customer: ''
+                                    address_customer: '',
+                                    type: ''
                                 }
                                 //submitForm kembali di-set menjadi false
                                 this.submitForm = false

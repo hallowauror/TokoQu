@@ -17559,7 +17559,8 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         this.customer = {
           name_customer: '',
           phone_customer: '',
-          address_customer: ''
+          address_customer: '',
+          type: ''
         };
       }
     }
@@ -17664,7 +17665,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       var _this6 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/customer/search', {
-        email: this.customer.email_customer
+        email_customer: this.customer.email_customer
       }).then(function (response) {
         if (response.data.status == 'success') {
           _this6.customer = response.data.data;
@@ -17672,8 +17673,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         }
 
         _this6.formCustomer = true;
-      })["catch"](function (error) {
-        console.log(error);
+      })["catch"](function (error) {// console.log(error);
       });
     },
     sendOrder: function sendOrder() {
@@ -17683,12 +17683,12 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       this.errorMessage = '';
       this.message = ''; //jika var customer.email dll tidak kosong
 
-      if (this.customer.email_customer != '' && this.customer.name_customer != '' && this.customer.phone_customer != '' && this.customer.address_customer != '') {
+      if (this.customer.email_customer != '' && this.customer.name_customer != '' && this.customer.phone_customer != '' && this.customer.address_customer != '' && this.customer.type != '') {
         //maka akan menampilkan kotak dialog konfirmasi
         this.$swal({
           title: 'Kamu Yakin?',
-          text: 'Kamu Tidak Dapat Mengembalikan Tindakan Ini!',
-          type: 'warning',
+          text: 'Data yang diisi harus benar!',
+          icon: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Lanjutkan!',
           cancelButtonText: 'Batalkan!',
@@ -17721,7 +17721,8 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
                 _this7.customer = {
                   name_customer: '',
                   phone_customer: '',
-                  address_customer: ''
+                  address_customer: '',
+                  type: ''
                 }; //submitForm kembali di-set menjadi false
 
                 _this7.submitForm = false;

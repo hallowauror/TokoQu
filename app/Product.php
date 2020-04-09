@@ -10,6 +10,7 @@ class Product extends Model
 
     protected $guarded = [];
 
+    // Model product realtionship to category
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
