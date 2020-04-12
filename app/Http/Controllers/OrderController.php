@@ -155,21 +155,21 @@ class OrderController extends Controller
         }
     }
 
-    public function generateInvoice()
-    {
-        //ambil data dari table orders
-        $order = Order::orderBy('created_at', 'DESC');
-        //jika ada records
-        if($order->count()>0){
-            //ambil data pertama yang sudah dishort descending
-            $order = $order->first();
-            //explode invoice untuk dapatkan angka
-            $explode = explode('-', $order->invoice);
-            //angka dari hasil explode di +1
-            return 'INVOICE - '.$explode[1] + 1;
-        }
-        //jika belum ada records maka mereturn INVOICE - 1
-        return 'INVOICE - 1';
-    }
+    // public function generateInvoice()
+    // {
+    //     //ambil data dari table orders
+    //     $order = Order::orderBy('created_at', 'DESC');
+    //     //jika ada records
+    //     if($order->count()>0){
+    //         //ambil data pertama yang sudah dishort descending
+    //         $order = $order->first();
+    //         //explode invoice untuk dapatkan angka
+    //         $explode = explode('-', $order->invoice);
+    //         //angka dari hasil explode di +1
+    //         return 'INVOICE - '.$explode[1] + 1;
+    //     }
+    //     //jika belum ada records maka mereturn INVOICE - 1
+    //     return 'INVOICE - 1';
+    // }
 
 }

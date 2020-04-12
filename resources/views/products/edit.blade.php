@@ -95,7 +95,7 @@
                                     <label for="">Kategori</label>
                                     <select name="category_id" id="category_id"
                                         required class="form-control {{ $errors->has('category_id') ? 'is-invalid':'' }}">
-                                        <option value="">Pilih</option>
+                                        <option disabled>Pilih</option>
                                         @foreach ($categories as $row)
                                             <option value="{{ $row->id_category }}" {{ $row->id_category == $product->category_id ? 'selected':'' }}>
                                                 {{ ucfirst($row->name) }}

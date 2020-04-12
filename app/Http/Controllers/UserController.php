@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $role = User::orderBy('created_at', 'ASC')->get();
+        $role = Role::orderBy('name', 'ASC')->get();
         return view('users.create', compact('role'));
     }
 

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 ​
 @section('title')
-    <title>Manajemen Role</title>
+    <title>Manajemen Type</title>
 @endsection
 ​
 @section('content')
@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Role</h1>
+                        <h1 class="m-0 text-dark">Type</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Role</li>
+                            <li class="breadcrumb-item active">Type</li>
                         </ol>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <div class="col-md-4">
                         @card
                             @slot('title')
-                            Add Role
+                            Add Type
                             @endslot
 
                             @if (session('error'))
@@ -37,13 +37,13 @@
                                 @endalert
                             @endif
 ​
-                            <form role="form" action="{{ route('role.store') }}" method="POST">
+                            <form type="form" action="{{ route('type.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">Role</label>
+                                    <label for="type_name">Type</label>
                                     <input type="text"
-                                    name="name"
-                                    class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" id="name" required>
+                                    name="type_name"
+                                    class="form-control {{ $errors->has('type_name') ? 'is-invalid':'' }}" id="type_name" required>
                                 </div>
                             @slot('footer')
                                 <div class="card-footer">
@@ -56,7 +56,7 @@
                     <div class="col-md-8">
                         @card
                             @slot('title')
-                            List Role
+                            List Type
                             @endslot
 
                             @if (session('success'))
@@ -70,22 +70,20 @@
                                     <thead>
                                         <tr>
                                             <td>#</td>
-                                            <td>Role</td>
-                                            <td>Guard</td>
+                                            <td>Type</td>
                                             <td>Created At</td>
                                             <td>Action</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $no = 1; @endphp
-                                        @forelse ($role as $row)
+                                        @forelse ($type as $row)
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>{{ $row->guard_name }}</td>
+                                            <td>{{ $row->type_name }}</td>
                                             <td>{{ $row->created_at }}</td>
                                             <td>
-                                                <form action="{{ route('role.destroy', $row->id) }}" method="POST">
+                                                <form action="{{ route('type.destroy', $row->id_type) }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
@@ -102,7 +100,7 @@
                             </div>
 ​
                             <div class="float-right">
-                                {!! $role->links() !!}
+                                {!! $type->links() !!}
                             </div>
                             @slot('footer')
 ​

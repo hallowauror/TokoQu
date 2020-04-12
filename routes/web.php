@@ -20,15 +20,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
 
     // Route yang hanya bisa diakses oleh owner
-    Route::group(['middleware' => ['role:owner']], function () {
-
-        Route::resource('/role', 'RoleController')->except([
-            'create', 'show', 'edit', 'update'
-        ]);
-
-        Route::resource('/users', 'UserController')->except([
-            'show'
-        ]);
+    Route::group(['middleware' => ['role:Owner']], function () {
 
         Route::get('/users/roles/{id}', 'UserController@roles')->name('users.roles');
         Route::put('/users/roles/{id}', 'UserController@setRole')->name('users.set_role');
@@ -50,7 +42,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/checkout', 'OrderController@storeOrder')->name('order.storeOrder');
 
     Route::get('/home', 'HomeController@index')->name('home');
+    
+    Route::resource('/role', 'RoleController')->except([
+        'create', 'show', 'edit', 'update'
+    ]);
 
+    Route::resource('/users', 'UserController')->except([
+        'show'
+    ]);
+
+    Route::resource('/customer', 'CustomerController');
+
+    Route::resource('/type', 'TypeController')->except([
+        'create', 'show', 'edit', 'update'
+    ]);
+    
 });
 
 

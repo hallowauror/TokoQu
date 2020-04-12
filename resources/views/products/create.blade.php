@@ -37,6 +37,12 @@
                                     {!! session('success') !!}
                                 @endalert
                             @endif
+
+                            @if (session('error'))
+                                @alert(['type' => 'bg-danger'])
+                                    {!! session('error') !!}
+                                @endalert
+                            @endif
                             <form action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
