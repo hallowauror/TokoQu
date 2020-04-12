@@ -56,6 +56,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/type', 'TypeController')->except([
         'create', 'show', 'edit', 'update'
     ]);
+
+    Route::resource('/order', 'OrderController');
     
 });
 

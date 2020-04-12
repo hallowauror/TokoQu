@@ -107,7 +107,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('order.transaksi') }}" class="nav-link">
+                    <a href="{{ route('order.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-shopping-cart"></i>
                         <p>
                             Manajemen Order
