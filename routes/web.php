@@ -37,9 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/produk', 'ProductController');
 
-    Route::get('/transaksi', 'OrderController@addOrder')->name('order.transaksi');
-    Route::get('/checkout', 'OrderController@checkout')->name('order.checkout');
-    Route::post('/checkout', 'OrderController@storeOrder')->name('order.storeOrder');
+    // Route::get('/transaksi', 'OrderController@addOrder')->name('order.transaksi');
+    // Route::get('/checkout', 'OrderController@checkout')->name('order.checkout');
+    // Route::post('/checkout', 'OrderController@storeOrder')->name('order.storeOrder');
 
     Route::get('/home', 'HomeController@index')->name('home');
     

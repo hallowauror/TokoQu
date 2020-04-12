@@ -19,10 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 
-    Route::get('/product/{id}', 'OrderController@getProduct');
+    // Route::get('/product/{id}', 'OrderController@getProduct');
 
-    Route::post('/cart', 'OrderController@addToCart');
-    Route::get('/cart', 'OrderController@getCart');
-    Route::delete('/cart/{id}', 'OrderController@removeCart');
+    // Route::post('/cart', 'OrderController@addToCart');
+    // Route::get('/cart', 'OrderController@getCart');
+    // Route::delete('/cart/{id}', 'OrderController@removeCart');
 
-    Route::post('/customer/search', 'CustomerController@search');
+    // Route::post('/customer/search', 'CustomerController@search');
