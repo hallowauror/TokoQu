@@ -59,6 +59,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/order', 'OrderController');
     
+    //Route cek ongkir
+    Route::get('/ongkir', 'CheckOngkirController@index')->name('ongkir');
+    Route::post('/ongkir', 'CheckOngkirController@check_ongkir');
+    Route::get('/cities/{province_id}', 'CheckOngkirController@getCities'); 
+    
 });
 
 

@@ -114,6 +114,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('ongkir') }}" class="nav-link">
+                        <i class="nav-icon fa fa-truck"></i>
+                        <p>
+                            Cek Ongkir
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview">
                     <a class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

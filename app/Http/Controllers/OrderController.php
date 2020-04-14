@@ -7,12 +7,13 @@ use App\Order;
 use App\OrderDetail;
 use App\Customer;
 use App\User;
+use App\Product;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('customer', 'user')->orderBy('created_at', 'DESC')->paginate(10);
+        $orders = Order::with('customer', 'product', 'user')->orderBy('created_at', 'DESC')->paginate(10);
         return view('orders.index', compact('orders'));
     }
 
@@ -20,9 +21,9 @@ class OrderController extends Controller
     {
         $customers = Customer::orderBy('name_customer', 'ASC')->get();
         $users = User::orderBy('name', 'ASC')->get();
-        // $orderDetail = OrderDetail::orderBy('created_at', 'ASC')->get();
+        $products = Product::orderBy('product_name', 'ASC')->get();
 
-        return view('orders.create', compact('customers', 'users'));
+        return view('orders.create', compact('customers', 'users', 'products'));
     }
 
     public function store(Request $request)
@@ -31,6 +32,8 @@ class OrderController extends Controller
             'invoice' => 'required|max:20|unique:orders',
             'customer_id' => 'required|exists:customers,id_customer',
             'user_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id_product',
+            'qty' => 'required|integer',
             'total' => 'required|integer'
         ]);
 
@@ -39,6 +42,8 @@ class OrderController extends Controller
                 'invoice' => $request->invoice,
                 'customer_id' => $request->customer_id,
                 'user_id' => $request->user_id,
+                'product_id' => $request->product_id,
+                'qty' => $request->qty,
                 'total' => $request->total
             ]);
 
@@ -54,7 +59,8 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $customers = Customer::orderBy('name_customer', 'ASC')->get();
         $users = User::orderBy('name', 'ASC')->get();
-        return view('orders.edit', compact('order', 'customers', 'users'));
+        $products = Product::orderBy('product_name', 'ASC')->get();
+        return view('orders.edit', compact('order', 'customers', 'users', 'products'));
     }
 
     public function update(Request $request, $id)
@@ -63,6 +69,8 @@ class OrderController extends Controller
             'invoice' => 'required|max:20|exists:orders,invoice',
             'customer_id' => 'required|exists:customers,id_customer',
             'user_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id_product',
+            'qty' => 'required|integer',
             'total' => 'required|integer'
         ]);
 
@@ -73,6 +81,8 @@ class OrderController extends Controller
                 'invoice' => $request->invoice,
                 'customer_id' => $request->customer_id,
                 'user_id' => $request->user_id,
+                'product_id' => $request->product_id,
+                'qty' => $request->qty,
                 'total' => $request->total
             ]);
 

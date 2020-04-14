@@ -75,6 +75,23 @@
                                     <p class="text-danger">{{ $errors->first('user_id') }}</p>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Produk</label>
+                                    <select name="product_id" id="product_id"
+                                        required class="form-control {{ $errors->has('product_id') ? 'is-invalid':'' }}">
+                                        <option disabled>Pilih</option>
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->id_product }}">{{ ucfirst($product->product_name) }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="text-danger">{{ $errors->first('product_id') }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Qty</label>
+                                    <input type="number" name="qty" required
+                                        class="form-control {{ $errors->has('qty') ? 'is-invalid':'' }}">
+                                    <p class="text-danger">{{ $errors->first('qty') }}</p>
+                                </div>
+                                <div class="form-group">
                                     <label for="">Total</label>
                                     <input type="number" name="total" required
                                         class="form-control {{ $errors->has('total') ? 'is-invalid':'' }}">

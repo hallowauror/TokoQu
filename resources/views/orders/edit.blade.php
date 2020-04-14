@@ -73,6 +73,25 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Produk</label>
+                                    <select name="product_id" id="product_id"
+                                        required class="form-control {{ $errors->has('product_id') ? 'is-invalid':'' }}">
+                                        <option disabled>Pilih</option>
+                                        @foreach ($products as $row)
+                                            <option value="{{ $row->id }}" {{ $row->id_product == $order->product_id ? 'selected':'' }}>
+                                                {{ ucfirst($row->product_name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Qty</label>
+                                    <input type="number" name="qty" required
+                                        value="{{ $order->qty }}"
+                                        class="form-control {{ $errors->has('qty') ? 'is-invalid':'' }}">
+                                    <p class="text-danger">{{ $errors->first('qty') }}</p>
+                                </div>
+                                <div class="form-group">
                                     <label for="">Total</label>
                                     <input type="number" name="total" required
                                         value="{{ $order->total }}"
