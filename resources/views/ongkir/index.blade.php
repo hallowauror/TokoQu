@@ -2,6 +2,7 @@
 ​
 @section('title')
     <title>Cek Ongkir</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 ​
 @section('content')
@@ -27,12 +28,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3>ORIGIN</h3>
+                        <h3>Asal</h3>
                         <hr>
                         <div class="form-group">
                             <label class="font-weight-bold">PROVINSI ASAL</label>
                             <select class="form-control provinsi-asal" name="province_origin">
-                                <option value="0">-- pilih provinsi asal --</option>
+                                <option value="0">-- Pilih provinsi asal --</option>
                                 @foreach ($provinces as $province => $value)
                                     <option value="{{ $province  }}">{{ $value }}</option>
                                 @endforeach
@@ -41,7 +42,7 @@
                         <div class="form-group">
                             <label class="font-weight-bold">KOTA / KABUPATEN ASAL</label>
                             <select class="form-control kota-asal" name="city_origin">
-                                <option value="">-- pilih kota asal --</option>
+                                <option value="">-- Pilih kota asal --</option>
                             </select>
                         </div>
                     </div>
@@ -50,12 +51,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3>DESTINATION</h3>
+                        <h3>Tujuan</h3>
                         <hr>
                         <div class="form-group">
                             <label class="font-weight-bold">PROVINSI TUJUAN</label>
                             <select class="form-control provinsi-tujuan" name="province_destination">
-                                <option value="0">-- pilih provinsi tujuan --</option>
+                                <option value="0">-- Pilih provinsi tujuan --</option>
                                 @foreach ($provinces as $province => $value)
                                     <option value="{{ $province  }}">{{ $value }}</option>
                                 @endforeach
@@ -64,7 +65,7 @@
                         <div class="form-group">
                             <label class="font-weight-bold">KOTA / KABUPATEN TUJUAN</label>
                             <select class="form-control kota-tujuan" name="city_destination">
-                                <option value="">-- pilih kota tujuan --</option>
+                                <option value="">-- Pilih kota tujuan --</option>
                             </select>
                         </div>
                     </div>
@@ -73,20 +74,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3>KURIR</h3>
+                        <h3>Kurir</h3>
                         <hr>
                         <div class="form-group">
                             <label>PROVINSI TUJUAN</label>
                             <select class="form-control kurir" name="courier">
-                                <option value="0">-- pilih kurir --</option>
+                                <option value="0">-- Pilih kurir --</option>
                                 <option value="jne">JNE</option>
                                 <option value="pos">POS</option>
                                 <option value="tiki">TIKI</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="font-weight-bold">BERAT (GRAM)</label>
-                            <input type="number" class="form-control" name="weight" id="weight" placeholder="Masukkan Berat (GRAM)">
+                            <label class="font-weight-bold">BERAT (gram)</label>
+                            <input type="number" class="form-control" name="weight" id="weight" placeholder="Masukkan Berat (gram)">
                         </div>
                     </div>
                 </div>
@@ -109,9 +110,8 @@
 </div>
 @endsection
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+@section('js')
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
@@ -205,3 +205,4 @@
 
     });
 </script>
+@endsection
