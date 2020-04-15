@@ -54,7 +54,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:75',
             'email' => 'required|email|exists:users,email',
-            'password' => 'nullable|min:6'
+            'password' => 'nullable|min:6',
+            'profile_photo' => 'nullable|image|mimes:jpg,png,jpeg'
         ]);
 
         $user = User::findOrFail($id);

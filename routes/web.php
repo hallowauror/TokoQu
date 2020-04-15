@@ -37,10 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/produk', 'ProductController');
 
-    // Route::get('/transaksi', 'OrderController@addOrder')->name('order.transaksi');
-    // Route::get('/checkout', 'OrderController@checkout')->name('order.checkout');
-    // Route::post('/checkout', 'OrderController@storeOrder')->name('order.storeOrder');
-
     Route::get('/home', 'HomeController@index')->name('home');
     
     Route::resource('/role', 'RoleController')->except([
@@ -64,6 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/ongkir', 'CheckOngkirController@check_ongkir');
     Route::get('/cities/{province_id}', 'CheckOngkirController@getCities'); 
     
+    Route::get('setting', 'SettingController@profileSetting')->name('setting.profile');
+    Route::post('setting', 'SettingController@updateProfile')->name('setting.updateProfile');
 });
 
 

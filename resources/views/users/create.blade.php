@@ -63,7 +63,7 @@
                                         <option value="{{ $st }}">{{ $st }}</option>
                                         @endforeach
                                     </select>
-                                    <p class="text-danger">{{ $errors->first('role') }}</p>
+                                    <p class="text-danger">{{ $errors->first('status') }}</p>
                                 </div> --}}
                                 <div class="form-group">
                                     <label for="">Role</label>
