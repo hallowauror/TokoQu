@@ -40,6 +40,7 @@
                             <form action="{{ route('customer.update', $customer->id_customer) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
+                                
                                 <div class="form-group">
                                     <label for="">Nama Customer</label>
                                     <input type="text" name="name_customer" required
@@ -47,6 +48,7 @@
                                         class="form-control {{ $errors->has('name_customer') ? 'is-invalid':'' }}">
                                     <p class="text-danger">{{ $errors->first('name_customer') }}</p>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="">No. Telpon</label>
                                     <input type="number" name="phone_customer" required
@@ -54,6 +56,7 @@
                                         class="form-control {{ $errors->has('phone_customer') ? 'is-invalid':'' }}">
                                     <p class="text-danger">{{ $errors->first('phone_customer') }}</p>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="">Email Customer</label>
                                     <input type="text" name="email_customer" required
@@ -61,18 +64,7 @@
                                         class="form-control {{ $errors->has('email_customer') ? 'is-invalid':'' }}">
                                     <p class="text-danger">{{ $errors->first('email_customer') }}</p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Jenis Customer</label>
-                                    <select name="type_id" id="type_id"
-                                        required class="form-control {{ $errors->has('type_id') ? 'is-invalid':'' }}">
-                                        <option disabled>Pilih</option>
-                                        @foreach ($types as $row)
-                                            <option value="{{ $row->id_type }}" {{ $row->id_type == $customer->type_id ? 'selected':'' }}>
-                                                {{ ucfirst($row->type_name) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label for="">Alamat Customer</label>
                                     <textarea name="address_customer" id="address_customer"
@@ -80,11 +72,13 @@
                                         class="form-control {{ $errors->has('address_customer') ? 'is-invalid':'' }}">{{ $customer->address_customer }}</textarea>
                                     <p class="text-danger">{{ $errors->first('address_customer') }}</p>
                                 </div> 
+
                                 <div class="form-group">
                                     <button class="btn btn-info btn-sm">
                                         <i class="fa fa-refresh"></i> Update
                                     </button>
                                 </div>
+
                             </form>
                             @slot('footer')
 ​

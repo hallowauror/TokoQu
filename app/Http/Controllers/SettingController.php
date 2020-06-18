@@ -63,21 +63,22 @@ class SettingController extends Controller
         // }
 
         $user = Auth::user();
-
-        $photo_name = $user->id.'_profile_photo'.time().'.'.request()->profile_photo->getClientOriginalExtension();
         
-        $request->profile_photo->storeAs('photos', $photo_name);
-
-        $user->profile_photo = $photo_name;
-        $user->save();
+        if($request->hasFile('profile_photo')){
+            $photo_name = $user->id.'_profile_photo'.time().'.'.request()->profile_photo->getClientOriginalExtension();
+            $request->profile_photo->storeAs('photos', $photo_name);
+            $user->profile_photo = $photo_name;
+        }
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role
+            'role' => $request->role,
         ]);
-
         
-        return redirect()->back()->with(['success' => 'Profil berhasil diperbaharui']);
+        
+        $user->save();
+
+        return redirect()->back()->with(['success' => 'Profil berhasil diperbarui']);
     }
 }

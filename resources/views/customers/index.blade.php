@@ -28,10 +28,7 @@
                     <div class="col-md-12">
                         @card
                             @slot('title')
-                            <a href="{{ route('customer.create') }}"
-                                class="btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i> Tambah
-                            </a>
+                            Data Customer
                             @endslot
 
                             @if (session('success'))
@@ -48,7 +45,7 @@
                                             <th>Nama Customer</th>
                                             <th>Nomor Telpon</th>
                                             <th>Email</th>
-                                            <th>Jenis</th>
+                                            <th>Alamat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -59,7 +56,7 @@
                                             <td>{{$row->name_customer}}</td>
                                             <td>{{$row->phone_customer}}</td>
                                             <td>{{$row->email_customer}}</td>
-                                            <td>{{$row->type->type_name}}</td>
+                                            <td>{{$row->address_customer}}</td>
                                             <td>
                                                 <form action="{{ route('customer.destroy', $row->id_customer) }}" method="POST">
                                                     @csrf

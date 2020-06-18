@@ -53,15 +53,20 @@ Route::group(['middleware' => ['auth']], function () {
         'create', 'show', 'edit', 'update'
     ]);
 
+    // Route Order
     Route::resource('/order', 'OrderController');
+    Route::get('/tambah', 'OrderController@addOrder')->name('order.tambah');
+    Route::get('/checkout', 'OrderController@checkout')->name('order.checkout');
+    Route::post('/checkout', 'OrderController@storeOrder')->name('order.storeOrder');
+    Route::get('/order/pdf/{invoice}', 'OrderController@invoicePdf')->name('order.pdf');
     
     //Route cek ongkir
     Route::get('/ongkir', 'CheckOngkirController@index')->name('ongkir');
     Route::post('/ongkir', 'CheckOngkirController@check_ongkir');
     Route::get('/cities/{province_id}', 'CheckOngkirController@getCities'); 
-    
+
+    // Route update profile
     Route::get('setting', 'SettingController@profileSetting')->name('setting.profile');
     Route::post('setting', 'SettingController@updateProfile')->name('setting.updateProfile');
+    
 });
-
-

@@ -18,7 +18,7 @@ class AddRelationshipsToOrderDetailsTable extends Migration
             $table->foreign('order_id')->references('id_order')->on('orders')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
+                
             $table->bigInteger('product_id')->unsigned()->change();
             $table->foreign('product_id')->references('id_product')->on('products')
                 ->onUpdate('cascade')
@@ -33,7 +33,7 @@ class AddRelationshipsToOrderDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('order_details', function (Blueprint $table) {
+        Schema::table('order_details', function(Blueprint $table) {
             $table->dropForeign('order_details_order_id_foreign');
         });
 

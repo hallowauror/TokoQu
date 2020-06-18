@@ -10,11 +10,7 @@ class Order extends Model
 
     protected $guarded = [];
 
-    //Model relationships ke Order_detail menggunakan hasMany
-    public function orderDetail()
-    {
-        return $this->hasMany(OrderDetail::class);
-    }
+    protected $dates = ['created_at'];
 
     public function customer()
     {
@@ -29,6 +25,11 @@ class Order extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function order_detail()
+    {
+        return $this->hasMany(Order_detail::class, 'order_id');
     }
 
 }

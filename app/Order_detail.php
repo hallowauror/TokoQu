@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class Order_detail extends Model
 {
     protected $guarded = [];
 
-    protected $table = 'order_details';
+    protected $primaryKey = 'id_order_detail';
 
-    //Model relationships ke Order
     public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');

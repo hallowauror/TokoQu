@@ -31,7 +31,7 @@
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src='/storage/photos/{{ $user->profile_photo }}' alt="User profile picture">
+                  <img class="profile-user-img img-fluid img-circle" src='/storage/photos/{{ $user->profile_photo }}' alt="User profile picture" style="width:100px;height:100px;">
                 </div>
 
                 <h3 class="profile-username text-center"> {{Auth::user()->name}}</h3>
@@ -82,7 +82,7 @@
                     @endalert
                 @endif
 
-                    <form class="form-horizontal" action="{{ route('setting.updateProfile') }}" method="post" enctype="multipart/form-data">
+                    <form  action="{{ route('setting.updateProfile') }}" method="post" enctype="multipart/form-data">
                         @csrf
                       <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Nama</label>
@@ -94,7 +94,7 @@
                       <div class="form-group row">
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" name="email" class="form-control" required value="{{ $user->email }}">
+                            <input type="email" name="email" class="form-control" required value="{{ $user->email }}" readonly>
                             <p class="text-danger">{{ $errors->first('email') }}</p>
                         </div>
                       </div>

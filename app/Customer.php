@@ -12,8 +12,14 @@ class Customer extends Model
 
     protected $primaryKey = 'id_customer';
 
-    public function type()
+    public function getNameAttribute($value)
     {
-        return $this->belongsTo(Type::class, 'type_id');
+        return ucfirst($value);
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }
