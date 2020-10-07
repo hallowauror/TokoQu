@@ -3,6 +3,10 @@
 @section('title')
     <title>Manajemen User</title>
 @endsection
+
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+@endscetion
 ​
 @section('content')
     <div class="content-wrapper">
@@ -62,18 +66,14 @@
                                                 @endforeach
                                             </td>
                                             <td>
-                                                @if ($row->status)
-                                                <label class="badge badge-success">Aktif</label>
-                                                @else
-                                                <label for="" class="badge badge-default">Tidak Aktif</label>
-                                                @endif
+                                                <input type="checkbox" data-id="{{ $row->id }}" name="status" class="js-switch" {{ $row->status == 1 ? 'checked' : '' }}>
                                             </td>
                                             <td>
                                                 <form action="{{ route('users.destroy', $row->id) }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <a href="{{ route('users.roles', $row->id) }}" class="btn btn-info btn-sm"><i class="fa fa-user-secret"></i></a>
-                                                    <a href="{{ route('users.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                                    <!-- <a href="{{ route('users.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
                                                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             </td>
@@ -95,4 +95,31 @@
             </div>
         </section>
     </div>
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+<script>
+    let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+
+    elems.forEach(function(html) {
+        let switchery = new Switchery(html,  { size: 'small' });
+    });
+
+    $(document).ready(function(){
+    $('.js-switch').change(function () {
+        let status = $(this).prop('checked') === true ? 1 : 0;
+        let userId = $(this).data('id');
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('user.updateStatus') }}',
+            data: {'status': status, 'user_id': userId},
+            success: function (data) {
+                console.log(data.message);
+            }
+        });
+    });
+});
+</script>
 @endsection

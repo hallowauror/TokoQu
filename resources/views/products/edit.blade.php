@@ -114,13 +114,10 @@
 
                                 <div class="form-group">
                                     <label for="">Foto</label>
-                                    <input type="file" name="photo" class="form-control">
-                                    <p class="text-danger">{{ $errors->first('photo') }}</p>
-                                    @if (!empty($product->photo))
-                                        <hr>
-                                        <img src="{{ asset('uploads/product/' . $product->photo) }}"
-                                            alt="{{ $product->product_name }}"
-                                            width="150px" height="150px">
+                                    <input type="file" name="product_image" class="form-control">
+                                    <p class="text-danger">{{ $errors->first('product_image') }}</p>
+                                    @if (!empty($product->product_image))
+                                        
                                     @endif
                                 </div>
                                 

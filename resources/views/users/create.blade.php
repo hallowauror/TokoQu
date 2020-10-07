@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-sm">
-                                        <i class="fa fa-send"></i> Simpan
+                                     Simpan
                                     </button>
                                 </div>
                             </form>

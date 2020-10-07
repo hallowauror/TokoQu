@@ -57,7 +57,7 @@
                                             <input type="number" name="qty"
                                                 v-model="cart.qty" 
                                                 id="qty" value="1" 
-                                                min="1" class="form-control">
+                                                min="1" max="{{$product->stock}}" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <button class="btn btn-primary btn-sm"

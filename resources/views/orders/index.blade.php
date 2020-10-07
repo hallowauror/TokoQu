@@ -22,7 +22,7 @@
             </div>
         </div>
 ​
-        <section class="content" id="dw">
+        <section class="content" id="el">
             <div class="container-fluid">
                 <div class="row">
                     <!-- FORM UNTUK MENAMPILKAN DATA TRANSAKSI -->
@@ -97,7 +97,7 @@
                                             <td>{{ $row->customer->phone_customer }}</td>
                                             <td>Rp {{ number_format($row->total) }}</td>
                                             <td>{{ $row->user->name }}</td>
-                                            <td>{{ $row->created_at->format('d-m-Y H:i:s') }}</td>
+                                            <td>{{ $row->created_at->format('Y-m-d') }}</td>
                                             <td>
                                                 <a href="{{ route('order.pdf', $row->invoice) }}" 
                                                     target="_blank"
@@ -142,7 +142,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Mulai Tanggal</label>
-                                            <input type="text" name="start_date" 
+                                            <input type="text" name="start_date" required 
                                                 class="form-control {{ $errors->has('start_date') ? 'is-invalid':'' }}"
                                                 id="start_date"
                                                 value="{{ request()->get('start_date') }}"
@@ -151,7 +151,7 @@
 
                                         <div class="form-group">
                                             <label for="">Sampai Tanggal</label>
-                                            <input type="text" name="end_date" 
+                                            <input type="text" name="end_date"  required
                                                 class="form-control {{ $errors->has('end_date') ? 'is-invalid':'' }}"
                                                 id="end_date"
                                                 value="{{ request()->get('end_date') }}">

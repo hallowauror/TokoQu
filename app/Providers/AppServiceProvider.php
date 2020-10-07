@@ -30,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::component('components.card', 'card');
         Blade::component('components.alert', 'alert');
+
+        date_default_timezone_set('Asia/Jakarta');
+
     }
 }

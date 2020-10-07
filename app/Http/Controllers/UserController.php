@@ -125,7 +125,7 @@ class UserController extends Controller
          //fungsi syncPermission akan menghapus semua permission yang dimiliki role tersebut
          //kemudian di-assign kembali sehingga tidak terjadi duplicate data
          $role->syncPermissions($request->permission);
-         return redirect()->back()->with(['success' => 'Permission to Role Saved!']);
+         return redirect()->back()->with(['success' => 'Permission untuk role berhasil diperbarui!']);
     }
 
     public function roles(Request $request, $id)
@@ -145,6 +145,15 @@ class UserController extends Controller
         //menggunakan syncRoles agar terlebih dahulu menghapus semua role yang dimiliki
         //kemudian di-set kembali agar tidak terjadi duplicate
         $user->syncRoles($request->role);
-        return redirect()->back()->with(['success' => 'Role Sudah Di Set']);
+        return redirect()->back()->with(['success' => 'Role berhasil diubah']);
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->status = $request->status;
+        $user->save();
+
+        return response()->json(['message' => 'User status updated successfully.']);
     }
 }

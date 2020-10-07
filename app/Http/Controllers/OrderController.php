@@ -19,17 +19,17 @@ class OrderController extends Controller
         $orders = Order::orderBy('created_at', 'DESC')->with('order_detail', 'customer');
         $customers = Customer::orderBy('name_customer', 'ASC')->get();
         $users = User::orderBy('name', 'ASC')->get();
-
+    
         // Jika customer dipilih
         if(!empty($request->customer_id)){
             $orders = $orders->where('customer_id', $request->customer_id);
         }
-
+    
         // Jika user dipilih
         if(!empty($request->user_id)){
             $orders = $orders->where('user_id', $request->user_id);
         }
-
+    
         // Jika range date terisi
         if(!empty($request->start_date) && !empty($request->end_date)){
             // Validasi format harus date
@@ -37,18 +37,18 @@ class OrderController extends Controller
                 'start_date' => 'nullable|date',
                 'end_date' => 'nullable|date'
             ]);
-
-            // Re-formart range date menjadi Yy-Mm-Dd H:i:s
-            $start_date = Carbon::parse($request->start_date)->format('Y-m-d').'00:00:01';
-            $end_date = Carbon::parse($request->end_date)->format('Y-m-d').'23:59:59';
-
+    
+            // Re-formart range date menjadi Yy-Mm-Dd 
+            $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+            $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+    
             // Tambahkan whereBetween condition untuk ambil data dengan range
-            $orders = $orders->whereBetween('created_at', [$start_date, $end_date])->get();
+            $orders = $orders->whereBetween('created_at', [$start_date. ' 00:00:00', $end_date.' 23:59:59'])->get();
         } else {
             // Range date kosong, load 10 data terbaru
             $orders = $orders->take(10)->skip(0)->get();
         }
-
+    
         return view('orders.index', [
             'orders' => $orders,
             'customers' => $customers,
@@ -58,7 +58,7 @@ class OrderController extends Controller
             'total' => $this->countTotal($orders)
         ]);
     }
-
+    
     private function countItem($order)
     {
         // Default data 0
@@ -105,29 +105,29 @@ class OrderController extends Controller
         }
         return $total;
     }
-
+    
 
 
     // public function create()
     // {
-    //     $customers = Customer::orderBy('name_customer', 'ASC')->get();
-    //     $users = User::orderBy('name', 'ASC')->get();
-    //     $products = Product::orderBy('product_name', 'ASC')->get();
-
+        //     $customers = Customer::orderBy('name_customer', 'ASC')->get();
+        //     $users = User::orderBy('name', 'ASC')->get();
+        //     $products = Product::orderBy('product_name', 'ASC')->get();
+        
     //     return view('orders.create', compact('customers', 'users', 'products'));
     // }
 
     // public function store(Request $request)
     // {
     //     $this->validate($request, [
-    //         'invoice' => 'required|max:20|unique:orders',
-    //         'customer_id' => 'required|exists:customers,id_customer',
+        //         'invoice' => 'required|max:20|unique:orders',
+        //         'customer_id' => 'required|exists:customers,id_customer',
     //         'user_id' => 'required|exists:users,id',
     //         'product_id' => 'required|exists:products,id_product',
     //         'qty' => 'required|integer',
     //         'total' => 'required|integer'
     //     ]);
-
+    
     //     try {
     //         $order = Order::create([
     //             'invoice' => $request->invoice,
@@ -137,7 +137,7 @@ class OrderController extends Controller
     //             'qty' => $request->qty,
     //             'total' => $request->total
     //         ]);
-
+    
     //         return redirect(route('order.index'))
     //         ->with(['success' => '<strong>'. "Data berhasil ditambahkan" .'</strong>']);
     //     } catch (\Exception $e) {
@@ -157,7 +157,7 @@ class OrderController extends Controller
     // public function update(Request $request, $id)
     // {
     //     $this->validate($request, [
-    //         'invoice' => 'required|max:20|exists:orders,invoice',
+        //         'invoice' => 'required|max:20|exists:orders,invoice',
     //         'customer_id' => 'required|exists:customers,id_customer',
     //         'user_id' => 'required|exists:users,id',
     //         'product_id' => 'required|exists:products,id_product',
@@ -166,7 +166,7 @@ class OrderController extends Controller
     //     ]);
 
     //     try{
-    //         $order = Order::findOrFail($id);
+        //         $order = Order::findOrFail($id);
 
     //         $order->update([
     //             'invoice' => $request->invoice,
@@ -192,7 +192,7 @@ class OrderController extends Controller
     //     return redirect()->back()->with(['success' => '<strong>Data Berhasil Dihapus!</strong>']);
 
     // }
-
+    
     public function addOrder()
     {
         $products = Product::orderBy('created_at', 'DESC')->get();
@@ -210,7 +210,7 @@ class OrderController extends Controller
         $this->validate($request, [
             'product_id' => 'required|exists:products,id_product',
             'qty' => 'required|integer'
-        ]);
+            ]);
 
         $product = Product::findOrFail($request->product_id);
         // ambil cookie cart dengan request
@@ -259,17 +259,16 @@ class OrderController extends Controller
     {
         return view('orders.checkout');
     }
-
+    
     public function storeOrder(Request $request)
     {
-
         // Validasi customer
         $this->validate($request, [
             'email_customer' => 'required|email',
             'name_customer' => 'required|string|max:100',
             'phone_customer' => 'required|numeric',
             'address_customer' => 'required'
-        ]);
+        ]); 
         
         // ambil list cart dari cookie 
         $cart = json_decode($request->cookie('cart'), true);
@@ -303,19 +302,25 @@ class OrderController extends Controller
                 'customer_id' => $customer->id_customer,
                 'user_id' => auth()->user()->id,
                 'total' => array_sum(array_column($result, 'result'))
-            ]);
+            ]); 
             
             // Looping cart untuk order_details
             foreach($result as $key => $row){
+                
                 $order->order_detail()->create([
                     'product_id' => $key,
                     'qty' => $row['qty'],
                     'price' => $row['price']
-                ]);
+                    ]);
+
+            $product = Product::find($key);
+            $product->stock = $product->stock - $row['qty'];
+            $product->save();
+            
             }
-
-        Db::commit();
-
+            
+                Db::commit();
+            
             // return status dan message berupa code invoice dan hapus cookie
             return response()->json([
                 'status' => 'success',
@@ -331,7 +336,7 @@ class OrderController extends Controller
         }
 
     }
-
+    
     public function generateInvoice()
     {
         $order = Order::orderBy('created_at', 'DESC');

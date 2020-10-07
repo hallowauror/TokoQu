@@ -37,6 +37,16 @@
                                 @endalert
                             @endif
 
+                            <form action="/customer" method="GET">
+                                <div class="input-group input-group-sm" style="width: 200px;">
+                                    <input type="text" name="keyword" class="form-control float-right" placeholder="Cari">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default" value="cari"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -80,7 +90,7 @@
                                 </table>
                             </div>
                             <div class="float-right">
-                                {!! $customers->links() !!}
+                          
                             </div>
                             @slot('footer')
 ​

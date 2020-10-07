@@ -57,13 +57,6 @@
                                     <p class="text-danger">{{ $errors->first('email') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Password</label>
-                                    <input type="password" name="password"
-                                        class="form-control {{ $errors->has('password') ? 'is-invalid':'' }}">
-                                    <p class="text-danger">{{ $errors->first('password') }}</p>
-                                    <p class="text-warning">Biarkan kosong, jika tidak ingin mengganti password</p>
-                                </div>
-                                <div class="form-group">
                                     <button class="btn btn-primary btn-sm">
                                         <i class="fa fa-send"></i> Update
                                     </button>

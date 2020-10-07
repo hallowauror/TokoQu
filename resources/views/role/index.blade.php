@@ -25,35 +25,8 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
-                        @card
-                            @slot('title')
-                            Add Role
-                            @endslot
-
-                            @if (session('error'))
-                                @alert(['type' => 'danger'])
-                                    {!! session('error') !!}
-                                @endalert
-                            @endif
-​
-                            <form role="form" action="{{ route('role.store') }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="name">Role</label>
-                                    <input type="text"
-                                    name="name"
-                                    class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" id="name" required>
-                                </div>
-                            @slot('footer')
-                                <div class="card-footer">
-                                    <button class="btn btn-primary">Save</button>
-                                </div>
-                            </form>
-                            @endslot
-                        @endcard
-                    </div>
-                    <div class="col-md-8">
+                    
+                    <div class="col-md-12">
                         @card
                             @slot('title')
                             List Role
@@ -69,9 +42,8 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <td>#</td>
+                                            <td>No.</td>
                                             <td>Role</td>
-                                            <td>Guard</td>
                                             <td>Created At</td>
                                             <td>Action</td>
                                         </tr>
@@ -82,7 +54,6 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $row->name }}</td>
-                                            <td>{{ $row->guard_name }}</td>
                                             <td>{{ $row->created_at }}</td>
                                             <td>
                                                 <form action="{{ route('role.destroy', $row->id) }}" method="POST">

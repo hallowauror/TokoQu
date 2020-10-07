@@ -41,6 +41,7 @@ class SettingController extends Controller
             'name' => 'required|string|max:75',
             'email' => 'required|email|exists:users,email',
             'role' => 'required',
+            'password' => 'nullable|min:6',
             'profile_photo' => 'nullable|image|mimes:jpg,png,jpeg'
         ]);
 
@@ -70,10 +71,13 @@ class SettingController extends Controller
             $user->profile_photo = $photo_name;
         }
 
+        $password = !empty($request->password) ? bcrypt($request->password):$user->password;
+
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
+            'password' => $password
         ]);
         
         

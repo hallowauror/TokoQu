@@ -17524,7 +17524,8 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       id_product: '',
       sell_price: '',
       product_name: '',
-      product_image: ''
+      product_image: '',
+      stock: ''
     },
     customer: {
       email_customer: ''
@@ -17622,7 +17623,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
           //jika di setujui
           if (result.value) {
             //maka submitForm akan di-set menjadi true sehingga menciptakan efek loading
-            _this3.submitForm = true; //mengirimkan data dengan uri /checkout
+            _this3.submitForm = true; //mengirimkan data dengan url /checkout
 
             axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/checkout', _this3.customer).then(function (response) {
               setTimeout(function () {

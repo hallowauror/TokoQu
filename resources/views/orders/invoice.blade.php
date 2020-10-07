@@ -57,7 +57,7 @@
     <div class="header">
         <h3>TokoQta</h3>
         <h4 style="line-height: 0px;">Invoice: #{{ $order->invoice }}</h4>
-        <p><small style="opacity: 0.5;">{{ $order->created_at->format('d-m-Y H:i:s') }}</small></p>
+        <p><small style="opacity: 0.5;">{{ $order->created_at->format('d-m-Y') }}</small></p>
     </div>
     <div class="customer">
         <table>
@@ -86,6 +86,7 @@
                     <th>Produk</th>
                     <th>Harga</th>
                     <th>Jumlah</th>
+                    <th>Ongkir</th>
                     <th>Subtotal</th>
                 </tr>
             </thead>
@@ -102,6 +103,7 @@
                     <td>{{ $row->product->product_name }}</td>
                     <td>Rp {{ number_format($row->price) }}</td>
                     <td>{{ $row->qty }} Item</td>
+                    <td>Rp {{ number_format ("0") }}</td>
                     <td>Rp {{ number_format($row->price * $row->qty) }}</td>
                 </tr>
 ​
@@ -121,6 +123,7 @@
                     <th colspan="2">Total</th>
                     <td>Rp {{ number_format($totalPrice) }}</td>
                     <td>{{ number_format($totalQty) }} Item</td>
+                    <td>Rp {{ number_format("0") }}</td>
                     <td>Rp {{ number_format($total) }}</td>
                 </tr>
             </tfoot>

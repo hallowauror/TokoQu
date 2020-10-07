@@ -65,7 +65,7 @@ class CategoryController extends Controller
         ]);
 
         //redirect ke route kategori.index
-        return redirect(route('kategori.index'))->with(['success' => 'Kategori : ' . $categories->name . ' Ditambahkan']);
+        return redirect(route('kategori.index'))->with(['success' => 'Kategori berhasil diubah!']);
         } catch (\Exception $e){
              //jika gagal, redirect ke form yang sama lalu membuat flash message error
             return redirect()->back()->with(['error' => $e->getMessage()]);

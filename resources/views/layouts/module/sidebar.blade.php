@@ -1,9 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">TokoQu</span>
+        <span class="brand-text font-weight-light">TokoQta</span>
     </a>
 ​
     <!-- Sidebar -->
@@ -32,6 +30,8 @@
                         </p>
                     </a>
                 </li>
+
+                
                 <li class="nav-item has-treeview">
                 <a href="{{route('produk.index')}}" class="nav-link">
                         <i class="nav-icon fa fa-server"></i>
@@ -39,22 +39,28 @@
                             Manajemen Produk
                             <i class="right fa fa-angle-left"></i>
                         </p>
-                    </a>
+                    </a> 
                     <ul class="nav nav-treeview">
+                    @if(auth()->user()->can('Create Category') && auth()->user()->can('Edit Category') && auth()->user()->can('Delete Category'))
                         <li class="nav-item">
                             <a href="{{ route('kategori.index') }}" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>Kategori</p>
                             </a>
                         </li>
+                    @endif
+                    @if(auth()->user()->can('Create Product') && auth()->user()->can('Edit Product') && auth()->user()->can('Delete Product'))
                         <li class="nav-item">
                             <a href="{{route('produk.index')}}" class="nav-link">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>Produk</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
+                
+
                 @role('Owner')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -86,6 +92,8 @@
                     </ul>
                 </li>
                 @endrole
+
+                @if(auth()->user()->can('Edit Customer') || auth()->user()->can('Delete Customer'))
                 <li class="nav-item">
                     <a href="{{ route('customer.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
@@ -94,6 +102,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{ route('order.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-shopping-cart"></i>
@@ -110,6 +119,8 @@
                         </p>
                     </a>
                 </li>
+                
+                @if(auth()->user()->can('Check Ongkir'))
                 <li class="nav-item">
                     <a href="{{ route('ongkir') }}" class="nav-link">
                         <i class="nav-icon fa fa-truck"></i>
@@ -118,6 +129,8 @@
                         </p>
                     </a>
                 </li>
+                @endif
+
                 <li class="nav-item has-treeview">
                     <a class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

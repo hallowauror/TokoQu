@@ -34,7 +34,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         @card
                             @slot('title')
                             <h4 class="card-title">Add New Permission</h4>
@@ -57,9 +57,9 @@
 ​
                             @endslot
                         @endcard
-                    </div>
+                    </div> -->
 ​
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         @card
                             @slot('title')
                             Set Permission to Role
@@ -81,7 +81,7 @@
                                             @endforeach
                                         </select>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-danger">Check!</button>
+                                            <button class="btn btn-warning">Check Permission</button>
                                         </span>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                                             {{--  CHECK, JIKA PERMISSION TERSEBUT SUDAH DI SET, MAKA CHECKED --}}
                                                             {{ in_array($row, $hasPermission) ? 'checked':'' }}
                                                             > {{ $row }} <br>
-                                                        @if ($no++%4 == 0)
+                                                        @if ($no++%3 == 0)
                                                         <br>
                                                         @endif
                                                     @endforeach

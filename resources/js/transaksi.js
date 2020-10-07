@@ -15,7 +15,8 @@ new Vue({
             id_product: '',
             sell_price: '',
             product_name: '',
-            product_image: ''
+            product_image: '',
+            stock: ''
         },
 
         customer: {
@@ -116,7 +117,7 @@ new Vue({
                     if (result.value) {
                         //maka submitForm akan di-set menjadi true sehingga menciptakan efek loading
                         this.submitForm = true
-                        //mengirimkan data dengan uri /checkout
+                        //mengirimkan data dengan url /checkout
                         axios.post('/checkout', this.customer)
                             .then((response) => {
                                 setTimeout(() => {

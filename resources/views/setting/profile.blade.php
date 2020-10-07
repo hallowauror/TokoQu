@@ -99,6 +99,14 @@
                         </div>
                       </div>
                       <div class="form-group row">
+                          <label for="password" class="col-sm-2 col-form-label">Password</label>
+                          <div class="col-sm-10">
+                              <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid':'' }}">
+                              <p class="text-danger">{{ $errors->first('password') }}</p>
+                              <p class="text-warning">Biarkan kosong, jika tidak ingin mengganti password</p>
+                          </div>
+                      </div>
+                      <div class="form-group row">
                         <label for="role" class="col-sm-2 col-form-label">Role</label>
                         <div class="col-sm-10"> 
                             @foreach(Auth::user()->roles as $role)

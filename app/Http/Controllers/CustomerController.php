@@ -7,9 +7,14 @@ use App\Customer;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::orderBy('name_customer', 'DESC')->paginate(10);
+        if($request->has('keyword')){
+            $customers = Customer::where('name_customer', 'like', '%'.$request->keyword.'%')->get();
+        } else {
+            $customers = Customer::orderBy('name_customer', 'DESC')->paginate(10);
+        }
+       
         return view('customers.index', compact('customers'));
     }
 
@@ -77,14 +82,14 @@ class CustomerController extends Controller
         }
     }
 
-    // public function destroy($id)
-    // {
-    //     $customers = Customer::findOrFail($id);
+    public function destroy($id)
+    {
+        $customers = Customer::findOrFail($id);
 
-    //     $customers->delete();
-    //     return redirect()->back()->with(['success' => '<strong>Data Berhasil Dihapus!</strong>']);
+        $customers->delete();
+        return redirect()->back()->with(['success' => '<strong>Data Berhasil Dihapus!</strong>']);
 
-    // }
+    }
 
     public function search(Request $request)
     {

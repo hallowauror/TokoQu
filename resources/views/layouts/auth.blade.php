@@ -16,7 +16,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/') }}"><b>Toko</b>Qu</a>
+            <a href="{{ url('/') }}"><b>Toko</b>Qta</a>
         </div>
 ​
         @yield('content')

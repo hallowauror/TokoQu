@@ -36,7 +36,7 @@
                                     {!! session('error') !!}
                                 @endalert
                             @endif
-​
+​                           
                             <form role="form" action="{{ route('kategori.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
@@ -55,6 +55,7 @@
                                 </div>
                             </form>
                             @endslot
+                        
                         @endcard
                     </div>
                     <div class="col-md-8">
@@ -73,7 +74,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <td>#</td>
+                                            <td>No.</td>
                                             <td>Kategori</td>
                                             <td>Deskripsi</td>
                                             <td>Aksi</td>

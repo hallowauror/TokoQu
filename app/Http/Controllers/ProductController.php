@@ -11,9 +11,14 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->orderBy('created_at', 'DESC')->paginate(10);
+        if($request->has('keyword')){
+            $products = Product::where('product_name', 'like', '%'.$request->keyword.'%')->get();
+        } else {
+            $products = Product::with('category')->orderBy('created_at', 'DESC')->paginate();
+        }
+        
         return view('products.index', compact('products'));
     }
 
@@ -158,4 +163,5 @@ class ProductController extends Controller
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
+
 }
